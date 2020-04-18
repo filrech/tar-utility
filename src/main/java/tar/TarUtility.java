@@ -5,7 +5,7 @@ import org.kohsuke.args4j.CmdLineException;
 import java.io.IOException;
 
 public class TarUtility {
-    public static void main(String[] args) throws CmdLineException, IOException {
+    public static void main(String[] args) throws IOException {
         CommandLineValues parser = new CommandLineValues(args);
         if (parser.errors) return;
         if (parser.u == null) {
