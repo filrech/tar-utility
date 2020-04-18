@@ -1,0 +1,10 @@
+This file was archived:
+src\test\java\tar\resources\test1.txt=2
+src\test\java\tar\resources\test2.txt=3
+************
+
+Я кек а ты
+Не кек
+Я не кек
+Сам ты кек
+Каво чиво
