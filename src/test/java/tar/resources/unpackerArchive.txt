@@ -1,0 +1,13 @@
+This file was archived:
+src\test\java\tar\resources\unpackerResult1.txt=3
+src\test\java\tar\resources\unpackerResult2.txt=5
+************
+
+Строка 1 Файла 1
+Строка 2 Файла 1
+Строка 3 Файла 1
+Строка 1 Файла 2
+Строка 2 Файла 2
+Строка 3 Файла 2
+Строка 4 Файла 2
+Строка 5 Файла 2

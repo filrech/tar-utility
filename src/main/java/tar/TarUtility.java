@@ -1,7 +1,5 @@
 package tar;
 
-import org.kohsuke.args4j.CmdLineException;
-
 import java.io.IOException;
 
 public class TarUtility {
@@ -11,7 +9,7 @@ public class TarUtility {
         if (parser.u == null) {
             TarArchiver.archiver(parser.files, parser.out, parser.path);
         } else {
-            TarDecompressor.decompress(parser.u, parser.path);
+            TarUnpacking.decompress(parser.u);
         }
     }
 }
