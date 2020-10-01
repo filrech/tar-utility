@@ -1,40 +1,45 @@
 package tar;
 
-import org.kohsuke.args4j.*;
-
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CommandLineValues {
-    @Option(name = "-out", usage = "new archive", forbids = "-u")
-    String out;
+    private String out;
 
-    @Option(name = "-u", usage = "unzip", forbids = "-out")
-    String u;
+    private String u;
 
-    boolean errors;
+    private boolean errors;
 
-    @Argument(metaVar = "tar", usage = "Input Files", required = true)
-    public String tar;
+    private String tar;
 
-    @Argument(metaVar = "inputFiles", usage = "Input Files", index = 1)
-    public ArrayList<File> files;
+    private ArrayList<File> files = new ArrayList<>();
 
-    public String path = "src" + File.separator + "test" + File.separator + "java" + File.separator + "tar" + File.separator + "resources" + File.separator;
+    private String path = "src" + File.separator + "test" + File.separator + "java" + File.separator + "tar" + File.separator + "resources" + File.separator;
 
-    public CommandLineValues(String... args) {
-        CmdLineParser parser = new CmdLineParser(this);
-        try {
-            parser.parseArgument(args);
-            if (!tar.equals("tar")) {
-                throw new CmdLineException("Starts with \"tar\"");
+    public CommandLineValues(String[] args) {
+        if (args.length == 3 || args.length == 5) {
+            if (!args[0].equals("tar")) {
+                throw new IllegalArgumentException("Start with \"tar\"");
             }
-        } catch (CmdLineException e) {
-            System.err.println(e.getMessage());
-            System.err.println("Wrong input format");
-            System.err.println("Input: tar filename.txt filename.txt -out filename.txt OR tar -u filename.txt");
-            parser.printUsage(System.err);
-            errors = true;
+            if (args[1].equals("-u")) {
+                u = args[2];
+            } else if (args[3].matches("-out") && args[1].endsWith(".txt") &&
+                    args[2].endsWith(".txt") && args[4].endsWith(".txt")) {
+                files.add(new File(args[1]));
+                files.add(new File(args[2]));
+                out = args[4];
+            } else
+                throw new IllegalArgumentException("Input: tar filename.txt filename.txt -out filename.txt OR tar -u filename.txt");
+        }
+    }
+
+    public void launch(String[] args) throws IOException {
+        if (errors) return;
+        if (u == null) {
+            TarArchiver.archiver(files, out, path);
+        } else {
+            TarUnpacking.decompress(u);
         }
     }
 }

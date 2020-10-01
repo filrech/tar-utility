@@ -1,6 +1,5 @@
 package tar;
 
-import com.sun.tools.javac.util.Convert;
 import java.io.*;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,9 +15,9 @@ public class TarUnpacking {
             }
             line = br.readLine();
             while (!line.equals("************")) {
-                String[] lineParse = line.split("="); //TODO лучший разделитель. (:
+                String[] lineParse = line.split("=");
                 String filename = lineParse[0];
-                Integer stingCount = Convert.string2int(lineParse[1], 10);
+                Integer stingCount = Integer.parseInt(lineParse[1]);
                 info.put(filename, stingCount);
                 line = br.readLine();
             }
@@ -32,7 +31,6 @@ public class TarUnpacking {
                         writer.println(lineToWrite);
                         count++;
                     }
-                    writer.flush();
                 }
             }
         }

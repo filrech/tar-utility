@@ -17,14 +17,15 @@ public class TarArchiver {
                     line = br.readLine();
                     count++;
                 }
+                br.close();
                 writer.flush();
                 info.put(files.toString(), count);
             }
             info(tmp, output, path, info);
-            writer.close();
-            tmp.delete(); // Почему не удаляется? (Я тупой)
         }
+        tmp.delete();
     }
+
     static void info(File input, String output, String path, Map<String,Integer> info) throws IOException {
         try (PrintWriter writer = new PrintWriter(new File(path + output))) {
             writer.println("This file was archived:");
