@@ -39,6 +39,7 @@ public class TarArchiver {
                 writer.println(line);
                 line = br.readLine();
             }
+            br.close();
         }
     }
 }
